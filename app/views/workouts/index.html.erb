@@ -1,0 +1,15 @@
+<div class="exercise-index">
+  <h1>My Wokrouts</h1>
+  <%= link_to 'Create new workout', new_workout_path, class: "btn btn-primary" %>
+  <div class="col-md-6 pl-0">
+
+    <ul class="list-group">
+      <% @workouts.each do |workout| %>
+        <%= link_to workout do %>
+          <li class="list-group-item my-2"><%= workout.name%></li>
+        <% end %>
+      <% end %>
+    </ul>
+</div>
+
+</div>

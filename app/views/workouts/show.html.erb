@@ -1,0 +1,27 @@
+<% if flash[:error] %>
+  <p class="alert alert-danger"><%= flash[:errors] %></p>
+<% end %>
+<div class="my-4">
+
+  <h2><%= @workout.name %></h2>
+    <small><%= @workout&.created_at&.strftime("%b %d, %Y") %> <%= link_to 'Change Name', edit_workout_path(@workout) %></small>
+    <div class="row">
+      <% @workout.exercises.each do |exercise| %>
+        <div class="col-md-4 my-3">
+          <div class="card my-3">
+            <h5 class="card-header"><%= exercise.name %></h5>
+            <div class="card-body">
+              <p>Weight :<%= exercise.weight %></p>
+              <p>Reps :<%= exercise.reps %></p>
+              <p>Sets :<%= exercise.sets %></p>
+              <%= link_to 'Edit', edit_exercise_path(exercise) %> |
+              <%= link_to 'Delete', exercise_path(exercise), method: :delete, data: {confirm: "Are you sure?"} %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= link_to 'Add New Exercise', new_exercise_path(id: @workout), class: "btn btn-primary" %>
+    <%= link_to 'Back to Workouts', workouts_path(@workout), class: "btn btn-primary" %>
+</div>
