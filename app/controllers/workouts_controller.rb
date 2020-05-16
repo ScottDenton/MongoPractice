@@ -6,6 +6,13 @@ class WorkoutsController < ApplicationController
     @workouts = current_user.workouts
   end
 
+  def search
+    @query = params[:query]
+    @workouts = current_user.workouts.search(@query)
+    @search = true
+    render :index
+  end
+
   def new
     @workout = Workout.new
   end

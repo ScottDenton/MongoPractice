@@ -1,15 +1,33 @@
 <div class="exercise-index">
-  <h1>My Wokrouts</h1>
-  <%= link_to 'Create new workout', new_workout_path, class: "btn btn-primary" %>
-  <div class="col-md-6 pl-0">
-
-    <ul class="list-group">
-      <% @workouts.each do |workout| %>
-        <%= link_to workout do %>
-          <li class="list-group-item my-2"><%= workout.name%></li>
-        <% end %>
+  <div class="row">
+    <div class="col-md-8 my-4">
+      <h1>My Workouts</h1>
+      <% if @search %>
+      <h4 class="my-3"><%= pluralize(@workouts.count, 'workout')%> found for '<%= @query %>'</h4>
       <% end %>
-    </ul>
-</div>
+    </div>
+    <div class="col-md-4 my-4">
+      <%= link_to 'Create new workout', new_workout_path, class: "btn btn-primary " %>
+    </div>
+  </div>
+  <div class="row">
 
+    <div class="col-md-3 search-container my-4">
+      <%= form_tag(search_path, method: 'post') do  %>
+        <%= text_field_tag :query, @query, placeholder: 'Search', class: 'form-control' %>
+        <%= submit_tag "Search", class:'btn btn-primary btn-sm my-3' %>
+      <% end %>
+    </div>
+
+
+    <div class="col-md-8 my-4">
+      <ul class="list-group">
+        <% @workouts.each do |workout| %>
+          <%= link_to workout do %>
+            <li class="list-group-item mb-2"><%= workout.name%></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
